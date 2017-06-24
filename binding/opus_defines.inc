@@ -175,6 +175,8 @@ const
   OPUS_GET_PREDICTION_DISABLED_REQUEST = 4043;
 
 (* Don't use 4045, it's already taken by OPUS_GET_GAIN_REQUEST *)
+  OPUS_SET_PHASE_INVERSION_DISABLED_REQUEST = 4046;
+  OPUS_GET_PHASE_INVERSION_DISABLED_REQUEST = 4047;
 
 (* Macros to trigger compilation errors when the wrong types are provided to a CTL *)
 //TODO #define __opus_check_int(x) (((void)((x) == (opus_int32)0)), (opus_int32)(x))
@@ -216,6 +218,9 @@ const
   OPUS_FRAMESIZE_20_MS = 5004; (**< Use 20 ms frames *)
   OPUS_FRAMESIZE_40_MS = 5005; (**< Use 40 ms frames *)
   OPUS_FRAMESIZE_60_MS = 5006; (**< Use 60 ms frames *)
+  OPUS_FRAMESIZE_80_MS = 5007; (**< Use 80 ms frames *)
+  OPUS_FRAMESIZE_100_MS = 5008; (**< Use 100 ms frames *)
+  OPUS_FRAMESIZE_120_MS = 5009; (**< Use 120 ms frames *)
 
 (**@}*)
 
@@ -574,7 +579,9 @@ const
   * <dt>OPUS_FRAMESIZE_20_MS</dt><dd>Use 20 ms frames.</dd>
   * <dt>OPUS_FRAMESIZE_40_MS</dt><dd>Use 40 ms frames.</dd>
   * <dt>OPUS_FRAMESIZE_60_MS</dt><dd>Use 60 ms frames.</dd>
-  * <dt>OPUS_FRAMESIZE_VARIABLE</dt><dd>Optimize the frame size dynamically.</dd>
+  * <dt>OPUS_FRAMESIZE_80_MS</dt><dd>Use 80 ms frames.</dd>
+  * <dt>OPUS_FRAMESIZE_100_MS</dt><dd>Use 100 ms frames.</dd>
+  * <dt>OPUS_FRAMESIZE_120_MS</dt><dd>Use 120 ms frames.</dd>
   * </dl>
   * @hideinitializer *)
 //TODO #define OPUS_SET_EXPERT_FRAME_DURATION(x) OPUS_SET_EXPERT_FRAME_DURATION_REQUEST, __opus_check_int(x)
@@ -589,7 +596,9 @@ const
   * <dt>OPUS_FRAMESIZE_20_MS</dt><dd>Use 20 ms frames.</dd>
   * <dt>OPUS_FRAMESIZE_40_MS</dt><dd>Use 40 ms frames.</dd>
   * <dt>OPUS_FRAMESIZE_60_MS</dt><dd>Use 60 ms frames.</dd>
-  * <dt>OPUS_FRAMESIZE_VARIABLE</dt><dd>Optimize the frame size dynamically.</dd>
+  * <dt>OPUS_FRAMESIZE_80_MS</dt><dd>Use 80 ms frames.</dd>
+  * <dt>OPUS_FRAMESIZE_100_MS</dt><dd>Use 100 ms frames.</dd>
+  * <dt>OPUS_FRAMESIZE_120_MS</dt><dd>Use 120 ms frames.</dd>
   * </dl>
   * @hideinitializer *)
 //TODO #define OPUS_GET_EXPERT_FRAME_DURATION(x) OPUS_GET_EXPERT_FRAME_DURATION_REQUEST, __opus_check_int_ptr(x)
@@ -688,6 +697,30 @@ const
   * @hideinitializer
   *)
 //TODO #define OPUS_GET_SAMPLE_RATE(x) OPUS_GET_SAMPLE_RATE_REQUEST, __opus_check_int_ptr(x)
+
+(** If set to 1, disables the use of phase inversion for intensity stereo,
+  * improving the quality of mono downmixes, but slightly reducing normal
+  * stereo quality. Disabling phase inversion in the decoder does not comply
+  * with RFC 6716, although it does not cause any interoperability issue and
+  * is expected to become part of the Opus standard once RFC 6716 is updated
+  * by draft-ietf-codec-opus-update.
+  * @see OPUS_GET_PHASE_INVERSION_DISABLED
+  * @param[in] x <tt>opus_int32</tt>: Allowed values:
+  * <dl>
+  * <dt>0</dt><dd>Enable phase inversion (default).</dd>
+  * <dt>1</dt><dd>Disable phase inversion.</dd>
+  * </dl>
+  * @hideinitializer *)
+//TODO #define OPUS_SET_PHASE_INVERSION_DISABLED(x) OPUS_SET_PHASE_INVERSION_DISABLED_REQUEST, __opus_check_int(x)
+(** Gets the encoder's configured phase inversion status.
+  * @see OPUS_SET_PHASE_INVERSION_DISABLED
+  * @param[out] x <tt>opus_int32 *</tt>: Returns one of the following values:
+  * <dl>
+  * <dt>0</dt><dd>Stereo phase inversion enabled (default).</dd>
+  * <dt>1</dt><dd>Stereo phase inversion disabled.</dd>
+  * </dl>
+  * @hideinitializer *)
+//TODO #define OPUS_GET_PHASE_INVERSION_DISABLED(x) OPUS_GET_PHASE_INVERSION_DISABLED_REQUEST, __opus_check_int_ptr(x)
 
 (**@}*)
 
